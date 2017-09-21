@@ -136,6 +136,30 @@ function validate(values) {
 }
 `;
 
+const reduxForm = `
+export default reduxForm({
+  form: 'someForm',
+  validate: (values, props) => {
+    const errors = {}
+
+    // populate errors object
+
+    return errors
+  }
+})
+`;
+
+const reduxFormValidateThis = `
+export default reduxForm({
+  form: 'someForm',
+  validate: (values, props) => {
+    return validator(values, form => {
+      form.validate('age').satisfies(greaterThan(17), lessThan(26))
+    })
+  }
+})
+`;
+
 export default class Presentation extends React.Component {
   renderSponsorHeading(text) {
     return (
@@ -184,7 +208,7 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide style={walkenBg}>
           <BlockQuote>
-            <Quote>Does your mother validate? Tell her to validate this!</Quote>
+            <Quote>Does your mother validate? Tell her to validate-this!</Quote>
             <Cite textColor="primary">Christopher Walken (but not really)</Cite>
           </BlockQuote>
         </Slide>
@@ -206,8 +230,19 @@ export default class Presentation extends React.Component {
           </Layout>
         </Slide>
         <Slide>
+          <Heading size={3} textColor="secondary">Validate what now?</Heading>
+          <List style={{ listStyle: 'square' }}>
+            <ListItem>Absolutely any JavaScript object, with nested objects and arrays</ListItem>
+            <ListItem>Returns a JavaScript object with complete error information</ListItem>
+            <ListItem>Agnostic, but not-so-accidentally works very well with redux-form</ListItem>
+            <ListItem>Custom validations are first class citizens</ListItem>
+          </List>
+        </Slide>
+        <Slide>
           <Heading size={3} textColor="secondary">Built In Validations</Heading>
-          <Heading size={5} textColor="secondary">(we only have a few)</Heading>
+          <Text textFont="monospace" margin="auto auto 1em auto" textColor="secondary">
+            (we only have a few)
+          </Text>
           <CodePane lang="javascript" source={builtIns} />
         </Slide>
         <Slide>
@@ -224,18 +259,50 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
           <Heading size={3} textColor="secondary">Custom Validations</Heading>
-          <Heading size={5} textColor="secondary">For Better Flexibility</Heading>
+          <Text textFont="monospace" margin="auto auto 1em auto" textColor="secondary">
+            For Better Flexibility
+          </Text>
           <Image src={images.flex} />
         </Slide>
         <Slide>
           <Heading size={3} textColor="secondary">The Good Way</Heading>
-          <Heading size={5} textColor="secondary">Create your own built-in rules</Heading>
+          <Text textFont="monospace" margin="auto auto 1em auto" textColor="secondary">
+            Create your own built-in rules
+          </Text>
           <CodePane lang="javascript" source={theGoodWay} />
         </Slide>
         <Slide>
           <Heading size={3} textColor="secondary">The Better Way</Heading>
-          <Heading size={5} textColor="secondary">Satisfy any condition</Heading>
+          <Text textFont="monospace" margin="auto auto 1em auto" textColor="secondary">
+            Satisfy any condition
+          </Text>
           <CodePane lang="javascript" source={theBetterWay} />
+        </Slide>
+        <Slide>
+          <Heading size={3} textColor="secondary">Validate Anything</Heading>
+        </Slide>
+        <Slide>
+          <Heading size={3} textColor="secondary">Validate Anything</Heading>
+          <Text textFont="monospace" margin="auto auto 5em auto" textColor="secondary">
+            At least, I think so
+          </Text>
+        </Slide>
+        <Slide>
+          <Heading size={3} textColor="secondary">Validate Anything</Heading>
+          <Text textFont="monospace" margin="auto auto 5em auto" textColor="secondary">
+            Seriously though, no regex please
+          </Text>
+        </Slide>
+        <Slide>
+          <Heading size={3} textColor="secondary">Redux-Form</Heading>
+          <CodePane lang="javascript" source={reduxForm} />
+        </Slide>
+        <Slide>
+          <Heading size={3} textColor="secondary">Redux-Form</Heading>
+          <Text textFont="monospace" margin="auto auto 1em auto" textColor="secondary">
+            With a shot of validate-this
+          </Text>
+          <CodePane lang="javascript" source={reduxFormValidateThis} />
         </Slide>
       </Deck>
     );
